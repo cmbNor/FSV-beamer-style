@@ -1,0 +1,42 @@
+
+\ProvidesPackage{beamerthemeFSV}
+
+% Use Montpellier as base theme
+\usetheme{Montpellier}
+
+% Define custom colors
+\definecolor{FSVGreen}{HTML}{049F7F}       % FSV grønn for headings
+\definecolor{FSVDarkGreen}{HTML}{226051}   % FSV mørk grønn for layout
+
+% Apply colors to headings and structure
+\setbeamercolor{frametitle}{fg=FSVGreen}
+%\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+\setbeamercolor{title}{fg=FSVGreen}
+\setbeamerfont{title}{size=\huge,series=\mdseries}
+\setbeamercolor{structure}{fg=FSVDarkGreen}
+\setbeamercolor{item}{fg=FSVDarkGreen}
+
+% Endre punkttegn til runde sirkler
+\setbeamertemplate{itemize item}{\raisebox{0.2ex}{\tikz\draw[fill=FSVDarkGreen,draw=FSVDarkGreen] (0,0) circle (0.4ex);}} % Første nivå
+\setbeamertemplate{itemize subitem}{\raisebox{0.2ex}{\tikz\draw[fill=FSVDarkGreen,draw=FSVDarkGreen] (0,0) circle (0.3ex);}} % Andre nivå
+\setbeamertemplate{itemize subsubitem}{\raisebox{0.2ex}{\tikz\draw[fill=FSVDarkGreen,draw=FSVDarkGreen] (0,0) circle (0.2ex);}} % Tredje nivå
+
+
+% Custom footline with logo and text
+\setbeamertemplate{footline}{
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[anchor=south west, xshift=0.5cm, yshift=0cm] at (current page.south west) {
+			\includegraphics[width=1.2cm]{../../../frontmatter/bilder/r171JViZ6gmf8WXujFQw.jpg}
+		};
+		\node[anchor=south east, xshift=-0.5cm, yshift=0.3cm] at (current page.south east) {
+			\normalfont\fontsize{5pt}{7pt}\selectfont\textsf{HØYERE YRKESFAGLIG UTDANNING}
+		};
+	\end{tikzpicture}
+}
+
+% Fjerne navigasjonsknappene på bunn
+\setbeamertemplate{navigation symbols}{}
+
+% Fontvalg for Calibri
+\usepackage{fontspec}
+\newfontfamily\calibrifont{Calibri}
