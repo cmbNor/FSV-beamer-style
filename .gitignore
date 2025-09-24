@@ -1,5 +1,31 @@
-# Object file
-*.o
+# LaTeX hjelpefiler
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
 
-# Ada Library Information
-*.ali
+# PDF-utdata
+*.pdf
+
+# Midlertidige filer
+*.fls
+*.fdb_latexmk
+
+# Editor-spesifikke filer
+*.bak
+*.tmp
+*.swp
+
+# MacOS og systemfiler
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Bilder og figurer (hvis generert automatisk)
+figurer/
