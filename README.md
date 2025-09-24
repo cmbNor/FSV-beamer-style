@@ -64,6 +64,13 @@ Dette gir et utgangspunkt for å bygge egne presentasjoner.
 
 ## 💡 Tips
 
+### Bruke LLM for å lage slides
+
+Store språkmodeller (LLM), som ChatGPT, kan være et nyttig verktøy for å generere utkast til presentasjoner.  
+Hvis du gir modellen teksten eller disposisjonen du vil ha inn i en presentasjon, kan den automatisk foreslå LaTeX-kode for slides.  
+Resultatet blir ofte et godt utgangspunkt som du senere kan justere.
+
+
 ### PDF-leser med presentasjonsmodus
 
 Beamer lager vanlige PDF-filer. Du kan bruke hvilken som helst PDF-leser for å vise dem.  
