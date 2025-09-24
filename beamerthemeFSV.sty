@@ -1,42 +1,89 @@
-
 \ProvidesPackage{beamerthemeFSV}
 
-% Use Montpellier as base theme
-\usetheme{Montpellier}
+% -------------------------
+% Definer FSV-farger
+% -------------------------
+\definecolor{fsvdarkgreen}{HTML}{226051}
+\definecolor{fsvgreen}{HTML}{049F7F}
+\definecolor{fsvlightgreen}{HTML}{C1F6E2}
+\definecolor{fsvdarkgray}{HTML}{2E333A}
+\definecolor{fsvmidgray}{HTML}{ABADB0}
+\definecolor{fsvlightgray}{HTML}{CCCCCC}
+\definecolor{fsvyellow}{HTML}{E3DE24}
+\definecolor{fsvlightyellow}{HTML}{F6F8AF}
+\definecolor{fsvpurple}{HTML}{D959E8}
+\definecolor{fsvlightpurple}{HTML}{ECDCF9}
 
-% Define custom colors
-\definecolor{FSVGreen}{HTML}{049F7F}       % FSV grønn for headings
-\definecolor{FSVDarkGreen}{HTML}{226051}   % FSV mørk grønn for layout
+% -------------------------
+% Outer theme for toppnavigasjon
+% -------------------------
+\useoutertheme[subsection=false]{miniframes}
+\setbeamercolor{section in head/foot}{fg=white,bg=fsvdarkgreen}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=fsvgreen}
+\setbeamerfont{section in head/foot}{series=\bfseries}
+\setbeamerfont{subsection in head/foot}{series=\mdseries}
 
-% Apply colors to headings and structure
-\setbeamercolor{frametitle}{fg=FSVGreen}
-%\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
-\setbeamercolor{title}{fg=FSVGreen}
-\setbeamerfont{title}{size=\huge,series=\mdseries}
-\setbeamercolor{structure}{fg=FSVDarkGreen}
-\setbeamercolor{item}{fg=FSVDarkGreen}
+% -------------------------
+% Struktur og overskrifter
+% -------------------------
+\setbeamercolor{title}{fg=fsvdarkgreen}
+\setbeamerfont{title}{series=\bfseries,size=\huge}
 
-% Endre punkttegn til runde sirkler
-\setbeamertemplate{itemize item}{\raisebox{0.2ex}{\tikz\draw[fill=FSVDarkGreen,draw=FSVDarkGreen] (0,0) circle (0.4ex);}} % Første nivå
-\setbeamertemplate{itemize subitem}{\raisebox{0.2ex}{\tikz\draw[fill=FSVDarkGreen,draw=FSVDarkGreen] (0,0) circle (0.3ex);}} % Andre nivå
-\setbeamertemplate{itemize subsubitem}{\raisebox{0.2ex}{\tikz\draw[fill=FSVDarkGreen,draw=FSVDarkGreen] (0,0) circle (0.2ex);}} % Tredje nivå
+\setbeamercolor{frametitle}{fg=fsvgreen}
+\setbeamerfont{frametitle}{series=\bfseries,size=\Large}
 
+\setbeamercolor{structure}{fg=fsvdarkgreen}
+\setbeamercolor{item}{fg=fsvgreen}
 
-% Custom footline with logo and text
-\setbeamertemplate{footline}{
-	\begin{tikzpicture}[remember picture, overlay]
-		\node[anchor=south west, xshift=0.5cm, yshift=0cm] at (current page.south west) {
-			\includegraphics[width=1.2cm]{../../../frontmatter/bilder/r171JViZ6gmf8WXujFQw.jpg}
-		};
-		\node[anchor=south east, xshift=-0.5cm, yshift=0.3cm] at (current page.south east) {
-			\normalfont\fontsize{5pt}{7pt}\selectfont\textsf{HØYERE YRKESFAGLIG UTDANNING}
-		};
-	\end{tikzpicture}
+% -------------------------
+% Horisontale linjer under frametitle
+% -------------------------
+\setbeamertemplate{frametitle}{
+  \vskip1ex
+  \insertframetitle\par
+  \color{fsvdarkgreen}\rule{\linewidth}{0.8pt}
 }
 
-% Fjerne navigasjonsknappene på bunn
-\setbeamertemplate{navigation symbols}{}
+% -------------------------
+% Footline med logo og tekst
+% -------------------------
+\setbeamertemplate{footline}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south west, xshift=0.5cm, yshift=0cm] at (current page.south west) {
+      \includegraphics[width=1.2cm]{figurer/r171JViZ6gmf8WXujFQw.jpg} % STIEN TIL PLASSERING AV LOGO
+    };
+    \node[anchor=south east, xshift=-0.5cm, yshift=0.3cm] at (current page.south east) {
+      \normalfont\fontsize{5pt}{7pt}\selectfont\textsf{HØYERE YRKESFAGLIG UTDANNING}
+    };
+  \end{tikzpicture}
+}
 
-% Fontvalg for Calibri
-\usepackage{fontspec}
-\newfontfamily\calibrifont{Calibri}
+% -------------------------
+% Headline (ikke på tittelsiden)
+% -------------------------
+\defbeamertemplate*{headline}{FSVheadline}{%
+  \ifnum\insertpagenumber=1
+    % Ingen topptekst på tittelbildet
+  \else
+    \leavevmode%
+    \hbox{%
+      \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,leftskip=0.5cm,rightskip=0.5cm]{section in head/foot}%
+        \usebeamerfont{section in head/foot}%
+        \insertshorttitle%
+        \ifx\insertsubtitle\@empty\else\ -- \insertsubtitle\fi%
+        \hfill%
+        \ifdefined\authshort
+          \authshort\ \the\year%
+        \else
+          \insertshortauthor\ \the\year%
+        \fi
+      \end{beamercolorbox}%
+    }%
+  \fi
+}
+\setbeamertemplate{headline}[FSVheadline]
+
+% -------------------------
+% Fjern navigasjonsknapper
+% -------------------------
+\setbeamertemplate{navigation symbols}{}
