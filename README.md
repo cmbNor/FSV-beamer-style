@@ -7,9 +7,9 @@ Formålet er å sikre at alle presentasjoner får en enhetlig profil.
 
 ## 📦 Innhold
 
-- `beamerthemeFSV.sty` – selve stilfila.  
-- `eksempelPresentasjon.tex` – en enkel LaTeX-presentasjon som viser hvordan temaet brukes.  
-- `README.md` – denne veiledningen.  
+- `beamerthemeFSV.sty` – selve stilfila.
+- `eksempelPresentasjon.tex` – en enkel LaTeX-presentasjon som viser hvordan temaet brukes.
+- `README.md` – denne veiledningen.
 
 ---
 
@@ -20,8 +20,8 @@ Formålet er å sikre at alle presentasjoner får en enhetlig profil.
 
    ```
    prosjekter/
-   ├── presentasjon/        # her ligger .tex-filene dine
-   └── fsv-style/           # her ligger beamerthemeFSV.sty
+   ├── presentasjon/   # her ligger .tex-filene dine
+   └── fsv-style/      # her ligger beamerthemeFSV.sty
    ```
 
 2. **Koble stilfila til presentasjonen.**  
@@ -45,3 +45,50 @@ Formålet er å sikre at alle presentasjoner får en enhetlig profil.
    ```bash
    xelatex eksempelPresentasjon.tex
    ```
+
+---
+
+## 🖼️ Eksempelpresentasjon
+
+Det følger med en fil `eksempelPresentasjon.tex` som demonstrerer:
+
+- Slides med ren tekst
+- Punktlister
+- Bilde
+- TikZ-grafikk
+- Tips-slide om **Sumatra PDF**
+
+Dette gir et utgangspunkt for å bygge egne presentasjoner.
+
+---
+
+## 💡 Tips
+
+### PDF-leser med presentasjonsmodus
+
+Beamer lager vanlige PDF-filer. Du kan bruke hvilken som helst PDF-leser for å vise dem.  
+Et godt gratis-alternativ (særlig på Windows) er:
+
+- **Sumatra PDF**  
+  Lettvekts, open source PDF-leser med en enkel og god presentasjonsmodus.  
+  Last ned her: [https://www.sumatrapdfreader.org/](https://www.sumatrapdfreader.org/)
+
+---
+
+## 📚 Krav
+
+- **LaTeX-distribusjon** (TeX Live eller MikTeX anbefales)
+- **XeLaTeX eller LuaLaTeX** for å støtte fontvalg via `fontspec`
+- Følgende pakker må være installert:
+  - `tikz`
+  - `graphicx`
+  - `xcolor`
+  - `etoolbox`
+  - `siunitx`
+
+---
+
+## 🏫 Lisens og bruk
+
+Dette temaet er laget for **Fagskolen Viken**.  
+Andre kan bruke det som mal eller tilpasse det etter behov.
