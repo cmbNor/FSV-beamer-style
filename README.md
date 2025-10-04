@@ -29,15 +29,10 @@ Formålet er å sikre at alle presentasjoner får en enhetlig profil.
 
    ```latex
    \documentclass{beamer}
-   \usepackage{../fsv-style/beamerthemeFSV}
+   \usetheme{FSV}
    ```
 
-   🔑 Merk: `../` betyr "gå ett nivå opp i mappestrukturen".  
-   Hvis du har stilfila i samme mappe som presentasjonen kan du skrive:
-
-   ```latex
-   \usepackage{beamerthemeFSV}
-   ```
+   🔑 Merk: Dersom du vil slippe å kopiere `.sty` til hver prosjektmappe, kan du heller legge til hele repo-mappa som en **local TeX directory** i MiKTeX/TeX Live. Se dokumentasjonen i repo for hvordan du legger til path.
 
 3. **Kompiler med XeLaTeX eller LuaLaTeX.**  
    Eksempel i terminal:
@@ -54,38 +49,34 @@ Det følger med en fil `eksempelPresentasjon.tex` som demonstrerer:
 
 - Slides med ren tekst
 - Punktlister
-- Bilde
+- Bilder
 - TikZ-grafikk
-- Tips-slide om **Sumatra PDF**
-
-Dette gir et utgangspunkt for å bygge egne presentasjoner.
+- Eksempel på `\pause` (gradvis fremvisning)
+- Eksempel på `\note` (presentasjonsnotater, støttet i Pympress)
 
 ---
 
 ## 💡 Tips
 
-### Bruke LLM for å lage slides
+### Bruke Pympress som presentasjonsverktøy
 
-Store språkmodeller (LLM), som ChatGPT, kan være et nyttig verktøy for å generere utkast til presentasjoner.  
-Hvis du gir modellen teksten eller disposisjonen du vil ha inn i en presentasjon, kan den automatisk foreslå LaTeX-kode for slides.  
-Resultatet blir ofte et godt utgangspunkt som du senere kan justere.
+For å vise Beamer-presentasjoner anbefales **Pympress**:
 
+- Open source, fungerer på Windows, Linux og macOS
+- Gir **presenter view** med:
+  - Neste slide
+  - Notater (`\note` i LaTeX)
+  - Timer/klokke
+- Mulighet for gradvis visning av punkter med `\pause`
 
-### PDF-leser med presentasjonsmodus
-
-Beamer lager vanlige PDF-filer. Du kan bruke hvilken som helst PDF-leser for å vise dem.  
-Et godt gratis-alternativ (særlig på Windows) er:
-
-- **Sumatra PDF**  
-  Lettvekts, open source PDF-leser med en enkel og god presentasjonsmodus.  
-  Last ned her: [https://www.sumatrapdfreader.org/](https://www.sumatrapdfreader.org/)
+📥 Last ned her: [https://pypi.org/project/pympress/](https://pypi.org/project/pympress/)
 
 ---
 
 ## 📚 Krav
 
-- **LaTeX-distribusjon** (TeX Live eller MikTeX anbefales)
-- **XeLaTeX eller LuaLaTeX** for å støtte fontvalg via `fontspec`
+- **LaTeX-distribusjon** (TeX Live eller MiKTeX anbefales)
+- **XeLaTeX eller LuaLaTeX** for fontstøtte
 - Følgende pakker må være installert:
   - `tikz`
   - `graphicx`

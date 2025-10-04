@@ -1,41 +1,26 @@
 \documentclass{beamer}
 
-% -------------------------
-% Koble til felles stilark
-% -------------------------
-% Du må fortelle LaTeX hvor stilfila (beamerthemeFSV.sty) ligger.
-%
-% Eksempel på mappeoppsett på PC-en din:
-%
-% ├── Prosjekter/
-% │   ├── felles-stil/
-% │   │   └── beamerthemeFSV.sty
-% │   └── presentasjoner/
-% │       └── minPresentasjon.tex   <-- (denne fila)
-%
-% Når du står i presentasjoner-mappa, så ligger "felles-stil" en mappe opp.
-% Derfor skriver vi:
-%\usepackage{../felles-stil/beamerthemeFSV}
+% ------------------------------------------------
+% Bruk temaet direkte fra repoet (uten MiKTeX-oppsett)
+% Repo-struktur (fra denne fila):
+%   tex/latex/beamer/themes/FSV-style/beamerthemeFSV.sty
+%   tex/latex/beamer/themes/FSV-style/fsv_logo.jpg
+% ------------------------------------------------
+\makeatletter
+\def\input@path{{tex/latex/beamer/themes/FSV-style/}}
+\makeatother
+\usepackage{beamerthemeFSV} % finner .sty via input@path
 
-% Hvis du legger stilfila i samme mappe som presentasjonen,
-% kan du nøye deg med:
-\usepackage{beamerthemeFSV}
-
-% -------------------------
-% Nødvendige pakker (må være i .tex-fila)
-% -------------------------
+% Nødvendige pakker i selve presentasjonen
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{etoolbox}
 \usepackage{siunitx}
+\usepackage{hyperref}
 
-% -------------------------
-% Presentasjonsinfo
-% -------------------------
+% Metadata
 \title{Eksempelpresentasjon}
-\subtitle{Demo av FSV Beamer Theme}
+\subtitle{Demo av FSV Beamer Theme (plug-and-play)}
 \author{Forfatter Navn}
 \newcommand{\authshort}{FN}
 \institute{Fagskolen Viken}
@@ -43,55 +28,27 @@
 
 \begin{document}
 	
-% -------------------------
-% Tittelslide
-% -------------------------
 	\begin{frame}
 		\titlepage
 	\end{frame}
-% -------------------------
-% Slide 1: Hvordan bruke stilfila
-% -------------------------
-	\begin{frame}{Hvordan bruke stilfila}
-		\begin{enumerate}
-			\item Lag to mapper på PC-en din, for eksempel:
-			\begin{itemize}
-				\item \texttt{felles-stil} – her legger du \texttt{beamerthemeFSV.sty}
-				\item \texttt{presentasjoner} – her legger du presentasjonene dine (.tex-filer)
-			\end{itemize}
-			\item Sjekk at mappene ligger på samme nivå, slik:
-		\end{enumerate}
-		
-		\begin{block}{Eksempel på mappeoppsett}
-			\texttt{Prosjekter/} \\
-			\quad \texttt{felles-stil/} \\
-			\quad\quad \texttt{beamerthemeFSV.sty} \\
-			\quad \texttt{presentasjoner/} \\
-			\quad\quad \texttt{minPresentasjon.tex}
-		\end{block}
-		
-		\begin{enumerate}
-			\setcounter{enumi}{2}
-			\item Inne i din \texttt{.tex}-fil legger du til:  
-			\texttt{\textbackslash usepackage\{../felles-stil/beamerthemeFSV\}}
-			\item Nå får du samme design på alle presentasjoner uten å kopiere stilfila flere steder.
-		\end{enumerate}
-	\end{frame}
 	
-% -------------------------
-% Slide 2: Ren tekst
-% -------------------------
-	\begin{frame}{Eksempel 1: Tekst}
+	\begin{frame}{Hvordan bruke temaet}
 		\begin{itemize}
-			\item Dette er en enkel slide
-			\item Med noen punkter
-			\item For å vise standard layout
+			\item Klon repoet.
+			\item Kompiler denne fila direkte — ingen MiKTeX-oppsett nødvendig.
+			\item Alternativt kan du legge repo-roten som TEXMF-root i MiKTeX og da bruke \texttt{\textbackslash usetheme\{FSV\}}.
 		\end{itemize}
 	\end{frame}
-% -------------------------
-% Slide 3: Tekst + bilde
-% -------------------------
-	\begin{frame}{Eksempel 2: Tekst og bilde}
+
+	
+	\begin{frame}{Eksempel: Tekst}
+		\begin{itemize}
+			\item Punkt 1
+			\item Punkt 2
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Eksempel: Tekst og bilde}
 		\begin{columns}
 			\column{0.5\textwidth}
 			\begin{itemize}
@@ -103,56 +60,11 @@
 		\end{columns}
 	\end{frame}
 	
-% -------------------------
-% Slide 4: Bilde øverst, tekst under
-% -------------------------
-	\begin{frame}{Eksempel 3: Bilde og tekst}
-		\centering
-		\includegraphics[width=0.7\textwidth]{example-image-a}
-		\vspace{0.5cm}
-		
+	\begin{frame}{Anbefalt PDF-viser}
 		\begin{itemize}
-			\item Bilde på toppen
-
+			\item Bruk \textbf{Pympress} for presentasjonsmodus med notater.
+			\item \url{https://pympress.github.io/}
 		\end{itemize}
 	\end{frame}
-	
-	% -------------------------
-	% Slide 5: TikZ-plot
-	% -------------------------
-	\begin{frame}{Eksempel 4: TikZ-figur}
-		\begin{tikzpicture}
-			\draw[->,thick] (0,0) -- (2,0) node[right]{x};
-			\draw[->,thick] (0,0) -- (0,2) node[above]{y};
-			\draw[red,thick] (0,0) -- (1,1) node[midway,above]{Linje};
-		\end{tikzpicture}
-	\end{frame}
-	
-% -------------------------
-\section{Tips}
-% -------------------------
-	
-	\begin{frame}{Tips: Bruk Sumatra PDF}
-		\begin{itemize}
-			\item Ferdig genererte Beamer-presentasjoner er vanlige PDF-filer.
-			\item Du kan bruke hvilken som helst PDF-leser, men jeg anbefaler:
-			\begin{itemize}
-				\item \textbf{Sumatra PDF} – et lettvekts, open source-program for Windows.
-				\item Har en \textbf{presentasjonsmodus} som fungerer godt med Beamer.
-				\item Last ned gratis her: \url{https://www.sumatrapdfreader.org/}
-			\end{itemize}
-		\end{itemize}
-	\end{frame}
-
-	\begin{frame}{Tips: Bruk av LLM for å lage slides}
-		\begin{itemize}
-			\item Store språkmodeller (LLM) som ChatGPT kan hjelpe deg å lage utkast til slides.  
-			\item Du kan lime inn tekst eller en disposisjon, og modellen kan foreslå LaTeX-kode.  
-			\item Resultatet er ofte et godt startpunkt.
-			\item Husk å alltid dobbeltsjekke innhold og gjøre faglige vurderinger selv.  
-		\end{itemize}
-	\end{frame}
-
 	
 \end{document}
-

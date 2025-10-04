@@ -1,0 +1,23 @@
+% beamerthemeFSV_dev.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeFSV_dev}[2025/09/24 v0.1 Development version]
+
+\RequirePackage{graphicx}
+\RequirePackage{expl3}
+
+\ExplSyntaxOn
+\tl_new:N \g_fsvdev_path_tl
+% Hent mappen der denne .sty-filen ligger
+\tl_set:Nn \g_fsvdev_path_tl { \file_path_str:n { beamerthemeFSV_dev.sty } }
+% Makro som peker til denne mappen
+\NewDocumentCommand \logopath {} { \g_fsvdev_path_tl }
+\ExplSyntaxOff
+
+% Eksempel: legg logo inn i footline på alle slides
+% Her antar vi at logoen ligger i en undermappe "figurer/"
+% i samme mappe som .sty-filen.
+\setbeamertemplate{footline}{%
+  \hfill
+  \includegraphics[height=1cm]{\logopath figurer/r171JViZ6gmf8WXujFQw.jpg}%
+  \hspace{1em}%
+}

@@ -1,6 +1,21 @@
 \ProvidesPackage{beamerthemeFSV}
 
 % -------------------------
+% Pakker
+% -------------------------
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{currfile} % Gir sti til hvor .sty-fila ligger
+
+% -------------------------
+% Sørg for at logo alltid kan finnes
+% -------------------------
+\makeatletter
+\def\FSV@logopath{\currfileabsdir} % peker på samme mappe som .sty
+\graphicspath{{\FSV@logopath}}
+\makeatother
+
+% -------------------------
 % Definer FSV-farger
 % -------------------------
 \definecolor{fsvdarkgreen}{HTML}{226051}
@@ -39,47 +54,48 @@
 % Horisontale linjer under frametitle
 % -------------------------
 \setbeamertemplate{frametitle}{
-  \vskip1ex
-  \insertframetitle\par
-  \color{fsvdarkgreen}\rule{\linewidth}{0.8pt}
+	\vskip1ex
+	\insertframetitle\par
+	\color{fsvdarkgreen}\rule{\linewidth}{0.8pt}
 }
 
 % -------------------------
 % Footline med logo og tekst
 % -------------------------
 \setbeamertemplate{footline}{
-  \begin{tikzpicture}[remember picture, overlay]
-    \node[anchor=south west, xshift=0.5cm, yshift=0cm] at (current page.south west) {
-      \includegraphics[width=1.2cm]{figurer/r171JViZ6gmf8WXujFQw.jpg} % STIEN TIL PLASSERING AV LOGO
-    };
-    \node[anchor=south east, xshift=-0.5cm, yshift=0.3cm] at (current page.south east) {
-      \normalfont\fontsize{5pt}{7pt}\selectfont\textsf{HØYERE YRKESFAGLIG UTDANNING}
-    };
-  \end{tikzpicture}
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[anchor=south west, xshift=0.5cm, yshift=0cm] at (current page.south west) {
+			\includegraphics[width=1.2cm]{fsv_logo.jpg}
+
+		};
+		\node[anchor=south east, xshift=-0.5cm, yshift=0.3cm] at (current page.south east) {
+			\normalfont\fontsize{5pt}{7pt}\selectfont\textsf{HØYERE YRKESFAGLIG UTDANNING}
+		};
+	\end{tikzpicture}
 }
 
 % -------------------------
 % Headline (ikke på tittelsiden)
 % -------------------------
 \defbeamertemplate*{headline}{FSVheadline}{%
-  \ifnum\insertpagenumber=1
-    % Ingen topptekst på tittelbildet
-  \else
-    \leavevmode%
-    \hbox{%
-      \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,leftskip=0.5cm,rightskip=0.5cm]{section in head/foot}%
-        \usebeamerfont{section in head/foot}%
-        \insertshorttitle%
-        \ifx\insertsubtitle\@empty\else\ -- \insertsubtitle\fi%
-        \hfill%
-        \ifdefined\authshort
-          \authshort\ \the\year%
-        \else
-          \insertshortauthor\ \the\year%
-        \fi
-      \end{beamercolorbox}%
-    }%
-  \fi
+	\ifnum\insertpagenumber=1
+	% Ingen topptekst på tittelbildet
+	\else
+	\leavevmode%
+	\hbox{%
+		\begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,leftskip=0.5cm,rightskip=0.5cm]{section in head/foot}%
+			\usebeamerfont{section in head/foot}%
+			\insertshorttitle%
+			\ifx\insertsubtitle\@empty\else\ -- \insertsubtitle\fi%
+			\hfill%
+			\ifdefined\authshort
+			\authshort\ \the\year%
+			\else
+			\insertshortauthor\ \the\year%
+			\fi
+		\end{beamercolorbox}%
+	}%
+	\fi
 }
 \setbeamertemplate{headline}[FSVheadline]
 
