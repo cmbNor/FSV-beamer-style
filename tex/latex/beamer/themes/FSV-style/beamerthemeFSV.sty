@@ -1,7 +1,7 @@
 \ProvidesPackage{beamerthemeFSV}
 
 % ========= Pakker (IKKE pgfpages her) =========
-\RequirePackage{tikz,pgfplots,siunitx,graphicx,hyperref,xcolor,currfile}
+\RequirePackage{tikz,pgfplots,siunitx,graphicx,hyperref,xcolor,currfile,comment,tabularx}
 \RequirePackage[norsk]{babel}
 
 % ========= Filstier og logo =========
@@ -29,6 +29,10 @@
   \gdef\beamer@notes{}%
 }
 \makeatother
+
+% Anbefalt av pgfplots (advarer ellers om "backwards compatibility mode")
+\pgfplotsset{compat=1.18}
+
 
 % --- Hvit bakgrunn og normal tekstfarge ---
 \setbeamercolor{background canvas}{bg=white}
