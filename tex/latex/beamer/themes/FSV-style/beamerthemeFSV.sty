@@ -1,24 +1,16 @@
 \ProvidesPackage{beamerthemeFSV}
 
-% -------------------------
-% Pakker
-% -------------------------
-\RequirePackage{tikz,pgfpages,pgfplots,siunitx,graphicx,comment,hyperref}
-\RequirePackage{currfile} % Gir sti til hvor .sty-fila ligger
+% ========= Pakker (IKKE pgfpages her) =========
+\RequirePackage{tikz,pgfplots,siunitx,graphicx,hyperref,xcolor,currfile}
 \RequirePackage[norsk]{babel}
 
-
-% -------------------------
-% Sørg for at logo alltid kan finnes
-% -------------------------
+% ========= Filstier og logo =========
 \makeatletter
-\def\FSV@logopath{\currfileabsdir} % peker på samme mappe som .sty
+\def\FSV@logopath{\currfileabsdir}
 \graphicspath{{\FSV@logopath}}
 \makeatother
 
-% -------------------------
-% Definer FSV-farger
-% -------------------------
+% ========= Farger =========
 \definecolor{fsvdarkgreen}{HTML}{226051}
 \definecolor{fsvgreen}{HTML}{049F7F}
 \definecolor{fsvlightgreen}{HTML}{C1F6E2}
@@ -30,18 +22,21 @@
 \definecolor{fsvpurple}{HTML}{D959E8}
 \definecolor{fsvlightpurple}{HTML}{ECDCF9}
 
-% -------------------------
-% Outer theme for toppnavigasjon
-% -------------------------
-\useoutertheme[subsection=false]{miniframes}
-\setbeamercolor{section in head/foot}{fg=white,bg=fsvdarkgreen}
-\setbeamercolor{subsection in head/foot}{fg=white,bg=fsvgreen}
-\setbeamerfont{section in head/foot}{series=\bfseries}
-\setbeamerfont{subsection in head/foot}{series=\mdseries}
+\makeatletter
+\def\beamer@framenotesbegin{% at beginning of slide
+  \usebeamercolor[fg]{normal text}%
+  \gdef\beamer@noteitems{}%
+  \gdef\beamer@notes{}%
+}
+\makeatother
 
-% -------------------------
-% Struktur og overskrifter
-% -------------------------
+% --- Hvit bakgrunn og normal tekstfarge ---
+\setbeamercolor{background canvas}{bg=white}
+\setbeamertemplate{background canvas}[default]
+
+% ========= Grunnstruktur =========
+\useoutertheme{default} % <-- reserverer plass til head/foot
+
 \setbeamercolor{title}{fg=fsvdarkgreen}
 \setbeamerfont{title}{series=\bfseries,size=\huge}
 
@@ -51,56 +46,55 @@
 \setbeamercolor{structure}{fg=fsvdarkgreen}
 \setbeamercolor{item}{fg=fsvgreen}
 
-% -------------------------
-% Horisontale linjer under frametitle
-% -------------------------
-\setbeamertemplate{frametitle}{
-	\vskip1ex
-	\insertframetitle\par
-	\color{fsvdarkgreen}\rule{\linewidth}{0.8pt}
+% ========= Frametitellinje =========
+\setbeamertemplate{frametitle}{%
+  \vskip1ex%
+  \insertframetitle\par
+  {\color{fsvdarkgreen}\rule{\linewidth}{0.8pt}}%
 }
 
-% -------------------------
-% Footline med logo og tekst
-% -------------------------
+% ========= Footline =========
 \setbeamertemplate{footline}{
-	\begin{tikzpicture}[remember picture, overlay]
-		\node[anchor=south west, xshift=0.5cm, yshift=0cm] at (current page.south west) {
-			\includegraphics[width=1.2cm]{fsv_logo.jpg}
-
-		};
-		\node[anchor=south east, xshift=-0.5cm, yshift=0.3cm] at (current page.south east) {
-			\normalfont\fontsize{5pt}{7pt}\selectfont\textsf{HØYERE YRKESFAGLIG UTDANNING}
-		};
-	\end{tikzpicture}
+  \leavevmode
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm,dp=0.2cm]{footline}
+    \hbox to \paperwidth{%
+      \hspace{0.5cm}%
+      \raisebox{-0.10cm}{\includegraphics[height=0.7cm]{fsv_logo.jpg}}%
+      \hfill
+      \raisebox{0.20cm}{\tiny\textsf{HØYERE YRKESFAGLIG UTDANNING}}%
+      \hspace{0.5cm}%
+    }%
+  \end{beamercolorbox}
 }
 
-% -------------------------
-% Headline (ikke på tittelsiden)
-% -------------------------
+% ========= Headline =========
+\makeatletter
 \defbeamertemplate*{headline}{FSVheadline}{%
-	\ifnum\insertpagenumber=1
-	% Ingen topptekst på tittelbildet
-	\else
-	\leavevmode%
-	\hbox{%
-		\begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,leftskip=0.5cm,rightskip=0.5cm]{section in head/foot}%
-			\usebeamerfont{section in head/foot}%
-			\insertshorttitle%
-			\ifx\insertsubtitle\@empty\else\ -- \insertsubtitle\fi%
-			\hfill%
-			\ifdefined\authshort
-			\authshort\ \the\year%
-			\else
-			\insertshortauthor\ \the\year%
-			\fi
-		\end{beamercolorbox}%
-	}%
-	\fi
+  \ifnum\insertpagenumber=1
+    % Skjul på tittelbildet – bruk [plain] i .tex om du vil styre dette pr. frame
+  \else
+    \leavevmode
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1ex,leftskip=0.5cm,rightskip=0.5cm]{section in head/foot}
+      \usebeamerfont{section in head/foot}%
+      \insertshorttitle%
+      \ifx\insertsubtitle\@empty\else\ -- \insertsubtitle\fi%
+      \hfill
+      \ifdefined\authshort
+        \authshort\ \the\year%
+      \else
+        \insertshortauthor\ \the\year%
+      \fi
+    \end{beamercolorbox}
+  \fi
 }
 \setbeamertemplate{headline}[FSVheadline]
+\makeatother
 
-% -------------------------
-% Fjern navigasjonsknapper
-% -------------------------
+% ========= Farger/Font for toppen (etter headline) =========
+\setbeamercolor{section in head/foot}{fg=white,bg=fsvdarkgreen}
+\setbeamercolor{subsection in head/foot}{fg=white,bg=fsvgreen}
+\setbeamerfont{section in head/foot}{series=\bfseries}
+\setbeamerfont{subsection in head/foot}{series=\mdseries}
+
+% ========= Navigasjon =========
 \setbeamertemplate{navigation symbols}{}
